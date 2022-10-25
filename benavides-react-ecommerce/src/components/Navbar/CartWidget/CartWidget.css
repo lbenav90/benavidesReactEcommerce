@@ -1,0 +1,20 @@
+.cart-widget {
+    padding-right: 1.5rem;
+    flex-grow: 1;
+    flex-basis: 0;
+    display:flex;
+    justify-content: right;
+}
+
+.cart-widget svg {
+    cursor: pointer;
+}
+
+.cart-widget svg:is(:hover, :focus) {
+    scale: 1.4;
+    transition: scale ease-in-out 0.3s;
+}
+
+.cart-widget svg:is(:not(:hover), :not(:focus)) {
+    transition: scale ease-in-out 0.3s;
+}
