@@ -1,15 +1,24 @@
-import { useState } from 'react'
 import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ItemContainer from './components/ItemContainer/ItemContainer'
 import Navbar from './components/Navbar/Navbar'
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
+import Cart from './components/Cart/Cart';
 
 function App() {
-  let greeting = 'Hola, acá van los ítems'
   return (
-    <>
+    <BrowserRouter>
       <Navbar/>
-      <ItemContainer greeting={ greeting }/>
-    </>
+      <Routes>
+        <Route path='/' element={ <ItemContainer />}/>
+        <Route path='/details/:productId' element={ <ItemDetailContainer />}/>
+        <Route path='/category/:categoryId' element={ <ItemContainer />}/>
+        <Route path='/cart' element={ <Cart />}/>
+
+        <Route path='*' element={<Navigate to='/'/>}/>
+
+      </Routes>
+    </BrowserRouter>
   )
 }
 
