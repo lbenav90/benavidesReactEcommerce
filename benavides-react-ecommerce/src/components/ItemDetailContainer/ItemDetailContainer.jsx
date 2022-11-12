@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './ItemDetailContainer.css'
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
+import ItemCount from '../ItemCount/ItemCount';
 
 const productosAPI = [
     {id: 0, name: 'Remera lisa', category: 'men', price: 1200, photo: 'https://d2r9epyceweg5n.cloudfront.net/stores/424/816/products/918-02502-ne-remera-lisa-cuello-redondo-color-negro1-dce1f4ad76bb3dcfa215124569568067-1024-1024.jpg', stock: 10},
@@ -29,13 +30,17 @@ const ItemDetailContainer = () => {
         loading? <LoadingAnimation />
         : (
             <div className='item-details'>
-                <h1>{product.name}</h1>
-                <h3>Categoría: {product.category}</h3>
-                <div className="item-details-img">
-                    <img src={product.photo}/>
+                <div className="item-information">
+                    <h1>{product.name}</h1>
+                    <h3>Categoría: {product.category}</h3>
+                    <div className="item-details-img">
+                        <img src={product.photo}/>
+                    </div>
+                    <h2>Precio: $ {product.price}</h2>
                 </div>
-                <h2>Precio: $ {product.price}</h2>
-                <h4>Disponibles: {product.stock}</h4>
+                <div className="item-count">
+                    <ItemCount type='details' name={product.name} stock={product.stock}/>
+                </div>
             </div>
         )
     )

@@ -1,9 +1,14 @@
 .item-details {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 100px;
     margin-top: 50px;
     margin-inline: 30px;
+}
+
+.item-information {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .item-details-img {
@@ -17,4 +22,15 @@
 .item-details-img img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.item-count {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: fit-content;
+    padding: 10px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

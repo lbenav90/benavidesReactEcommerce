@@ -1,6 +1,7 @@
 import React from 'react'
 import './ItemCard.css'
 import { Link } from 'react-router-dom'
+import ItemCount from '../../ItemCount/ItemCount'
 
 const ItemCard = ({ id, name, price, photo, stock }) => {
     return (
@@ -11,6 +12,7 @@ const ItemCard = ({ id, name, price, photo, stock }) => {
             <h4>{ name }</h4>
             <p>$ { price }</p>
             <p>Disponibles: {stock}</p>
+            <ItemCount type='card' name={name} stock={stock}/>
         </Link>
     )
 }
