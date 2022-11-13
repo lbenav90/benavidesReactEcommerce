@@ -60,6 +60,7 @@
     font-weight: 600;
     cursor: pointer;
     margin-top: 15px;
+    font-size: 13px;
 }
 
 .add-to-cart:hover {
@@ -86,11 +87,12 @@
 .item-counter.type-card {
     margin: 0;
     flex-grow: 2;
+    font-size: 14px;
 }
 
 .add-to-cart.type-card {
     margin: 0;
-    flex-grow: 1;
+    flex-grow: 0;
     align-self: center;
     padding: 5px 5px 5px 3px; /* Solo asi parece centrado */
     display:flex;
@@ -104,4 +106,19 @@
 
 .add-to-cart.type-card:hover svg {
     color:#e5e5e5;
+}
+
+.checkoutButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+}
+
+.no-stock {
+    margin-top: 20px; 
+    color: rgb(141, 22, 22);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

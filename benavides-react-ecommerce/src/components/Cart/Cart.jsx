@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Cart.css'
 import CheckoutTable from './CheckoutTable/CheckoutTable'
+import { useCartContext } from '../../context/CartContext'
 
 const Cart = () => {
-    const currentCart = JSON.parse(localStorage.getItem('mondrian-ecommerce-cart')) //array of id
+    const { cartList } = useCartContext();
 
     return (
         <div className='cart'>
@@ -12,8 +13,12 @@ const Cart = () => {
                 <h1>Checkout</h1>
                 <div className="checkout-items">
                     {
-                        currentCart? 
-                        <CheckoutTable items={ currentCart }/>
+                        (cartList.length != 0)? 
+                        <ul>
+                            {cartList.map((item) => {
+                                return <li>Nombre: {item.name} - Cantidad: {item.count}</li>
+                            })}
+                        </ul>
                         :
                         <h3>No hay ítems agregados!</h3>
                     }
