@@ -90,6 +90,10 @@
     font-size: 14px;
 }
 
+.item-counter.type-checkout {
+    margin: 0;
+}
+
 .add-to-cart.type-card {
     margin: 0;
     flex-grow: 0;

@@ -9,24 +9,24 @@ import { useEffect } from 'react';
 
 const ItemContainer = () => {
     const { products } = useCartContext();
+    const { categoryId } = useParams();
     const [ loading, setLoading ] = useState(true);
+    const [ display, setDisplay ] = useState([])
 
-    useEffect(() => {
+    useEffect(() => {   
       products.length != 0 && setLoading(false);
-    }, [products, loading])
-
-    let { categoryId } = useParams();
-
-    let cleanedProducts = [];
-
-    cleanedProducts = categoryId? Object.entries(products.filter((product) => product.category === categoryId)) : Object.entries(products)
+    }, [products])
+    
+    useEffect(() => {
+      setDisplay(categoryId? products.filter((product) => product.category === categoryId) : products);
+    }, [products, categoryId])
 
     return (
       loading? <LoadingAnimation />
       : (
           <div className='item-container'>
-              { cleanedProducts.map(product => (
-                <ItemCard key={product[0]} product={product[1]}/>
+              { display.map(product => (
+                <ItemCard key={product.id} product={product}/>
               )) }
           </div>
       )

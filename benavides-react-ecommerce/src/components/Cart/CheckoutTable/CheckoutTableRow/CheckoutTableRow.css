@@ -1,0 +1,28 @@
+.checkout-table-row {
+    display: flex;
+    height: 45px;
+    width: 90%;
+    gap: 35px;
+    align-items: center;
+    padding: 10px 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid #aeaeae;
+}
+
+.checkout-table-row > span.checkout-item-name {
+    flex-grow: 2;
+}
+
+.checkout-table-row > .type-checkout {
+    width: 120px;
+}
+
+.checkout-table-row > img {
+    max-height: inherit; 
+    max-width: 30px;
+}
+
+.checkout-item-delete:hover {
+    color:rgb(48, 126, 164);
+    cursor: pointer;
+}

@@ -42,7 +42,7 @@ const ItemDetailContainer = () => {
                     <h2>Precio: $ {product.price}</h2>
                 </div>
                 <div className="item-count">
-                    <ItemCount type='details' product={product} stock={stock} setStock={setStock}/>
+                    <ItemCount type='details' product={product}/>
                 </div>
             </div>
         )

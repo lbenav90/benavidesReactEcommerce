@@ -5,7 +5,7 @@ import CheckoutTable from './CheckoutTable/CheckoutTable'
 import { useCartContext } from '../../context/CartContext'
 
 const Cart = () => {
-    const { cartList } = useCartContext();
+    const { cartList, deleteAllItems, deleteSelectedItems } = useCartContext();
 
     return (
         <div className='cart'>
@@ -14,19 +14,15 @@ const Cart = () => {
                 <div className="checkout-items">
                     {
                         (cartList.length != 0)? 
-                        <ul>
-                            {cartList.map((item) => {
-                                return <li>Nombre: {item.name} - Cantidad: {item.count}</li>
-                            })}
-                        </ul>
+                        <CheckoutTable list={cartList}/>
                         :
                         <h3>No hay ítems agregados!</h3>
                     }
                 </div>
                 <div className="cart-buttons">
                     <Link to='/' className="cart-button volver">Seguir comprando</Link>
-                    <Link to='/' className="cart-button delete-selected">Borrar seleccionados</Link>
-                    <Link to='/' className="cart-button delete-all">Vaciar carrito</Link>
+                    <Link onClick={() => deleteSelectedItems()} className="cart-button delete-selected">Borrar seleccionados</Link>
+                    <Link onClick={() => deleteAllItems()} className="cart-button delete-all">Vaciar carrito</Link>
                     <Link to='/' className="cart-button checkout">Checkout</Link>
                 </div>
             </div>

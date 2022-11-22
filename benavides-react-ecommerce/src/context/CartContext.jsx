@@ -7,7 +7,7 @@ export const useCartContext= () => useContext(CartContext);
 
 const CartContextProvider = ({ children }) => {
     const [ cartList, setCartList ] = useState([]);
-    const [ products, setProducts ] = useState({});
+    const [ products, setProducts ] = useState([]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -28,10 +28,30 @@ const CartContextProvider = ({ children }) => {
 
     }
 
+    const deleteItem = (itemId) => {
+        setCartList(cartList.filter(item => item.id != itemId));
+    }
+
+    const deleteAllItems = () => {
+        setCartList([]);
+    }
+
+    const deleteSelectedItems = () => {
+        const selectedInputs = document.querySelectorAll('.checkout-checkbox');
+        const selectedIds = [];
+
+        selectedInputs.forEach(input => input.checked && selectedIds.push(parseInt(input.value)));
+
+        setCartList(cartList.filter(item => !selectedIds.includes(item.id)));
+    }
+
     return <CartContext.Provider value= {{
         products,
         cartList,
-        addItem
+        addItem,
+        deleteItem,
+        deleteAllItems,
+        deleteSelectedItems
     }}>
         { children }
     </CartContext.Provider>

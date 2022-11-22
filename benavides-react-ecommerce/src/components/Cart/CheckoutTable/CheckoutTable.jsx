@@ -1,8 +1,14 @@
 import React from 'react'
+import CheckoutTableRow from './CheckoutTableRow/CheckoutTableRow'
 
-const CheckoutTable = () => {
+const CheckoutTable = ({ list }) => {
+
     return (
-        <div>ChekcoutTable</div>
+        <>
+            {list.map((item) => {
+                return <CheckoutTableRow key={item.id} item={item} />
+            })}
+        </>
     )
 }
 

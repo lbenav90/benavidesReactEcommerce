@@ -10,7 +10,8 @@ const ItemCard = ({ product }) => {
     const currentStock = product.stock - (cartList.filter((prod) => product.id === prod.id)[0]?.count || 0);
 
     const [ stock, setStock ] = useState(currentStock)
-
+    
+    console.log('itemCard', product.name);
     return (
         <Link to={`/item/${product.id}`} className='item-card'>
             <div className="item-card-photo">
@@ -18,8 +19,8 @@ const ItemCard = ({ product }) => {
             </div>
             <h4>{ product.name }</h4>
             <p>$ { product.price }</p>
-            <p>Disponibles: {stock}</p>
-            <ItemCount type='card' product={product} stock={stock} setStock={setStock}/>
+            <p>Disponibles: { stock }</p>
+            <ItemCount type='card' product={product} setStock={setStock}/>
         </Link>
     )
 }
