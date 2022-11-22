@@ -11,7 +11,6 @@ const ItemCard = ({ product }) => {
 
     const [ stock, setStock ] = useState(currentStock)
     
-    console.log('itemCard', product.name);
     return (
         <Link to={`/item/${product.id}`} className='item-card'>
             <div className="item-card-photo">

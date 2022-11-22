@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import productosAPI from "../assets/productosAPI";
+import { getFirestore, collection, getDocs } from 'firebase/firestore'
 
 const CartContext = createContext([]);
 
@@ -10,9 +10,11 @@ const CartContextProvider = ({ children }) => {
     const [ products, setProducts ] = useState([]);
 
     useEffect(() => {
-        setTimeout(() => {
-            setProducts(productosAPI)
-        }, 1000)
+        const dbFirestore = getFirestore();
+        const queryCollection = collection(dbFirestore, 'items');
+        getDocs(queryCollection)
+         .then((resp) => { setProducts(resp.docs.map(doc => ({ id:doc.id, ...doc.data() }))) })
+
     }, [products])
 
     const addItem = (newCartItem) => {
@@ -45,16 +47,17 @@ const CartContextProvider = ({ children }) => {
         setCartList(cartList.filter(item => !selectedIds.includes(item.id)));
     }
 
-    return <CartContext.Provider value= {{
-        products,
-        cartList,
-        addItem,
-        deleteItem,
-        deleteAllItems,
-        deleteSelectedItems
-    }}>
-        { children }
-    </CartContext.Provider>
-}
+    return (
+        <CartContext.Provider value= {{
+            products,
+            cartList,
+            addItem,
+            deleteItem,
+            deleteAllItems,
+            deleteSelectedItems
+        }}>
+            { children }
+        </CartContext.Provider>
+)}
 
 export default CartContextProvider;
