@@ -1,0 +1,42 @@
+.successful-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 50px;
+    width: 70%;
+    margin-inline: auto;
+}
+
+.success-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.buyer-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.purchase-number {
+    font-size: 18px;
+}
+
+.success-info {
+    font-size: 14px;
+}
+
+.checkout-table.success{
+    margin-top: 20px;
+}
+
+.checkout-table.success > div:nth-child(2) {
+    border-top: 1px solid #aeaeae;
+}
+
+.success-table-title {
+    align-self: flex-start;
+    font-weight: 600;
+    margin-bottom: 40px;
+}

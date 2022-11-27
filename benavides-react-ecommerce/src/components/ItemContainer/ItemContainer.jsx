@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 const ItemContainer = () => {
     const { products } = useCartContext();
-    const { categoryId } = useParams();
+    const { categoryId, subcategoryId } = useParams();
     const [ loading, setLoading ] = useState(true);
     const [ display, setDisplay ] = useState([])
 
@@ -18,8 +18,12 @@ const ItemContainer = () => {
     }, [products])
     
     useEffect(() => {
-      setDisplay(categoryId? products.filter((product) => product.category === categoryId) : products);
-    }, [products, categoryId])
+      let filtered = products
+      categoryId && (filtered = filtered.filter((product) => product.category.split(' ').includes(categoryId)))
+      subcategoryId && (filtered = filtered.filter((product) => product.category.split(' ').includes(subcategoryId)))
+
+      setDisplay(filtered);
+    }, [products, categoryId, subcategoryId])
 
     return (
       loading? <LoadingAnimation />

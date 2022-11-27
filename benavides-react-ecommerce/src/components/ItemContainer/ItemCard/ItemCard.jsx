@@ -16,9 +16,9 @@ const ItemCard = ({ product }) => {
             <div className="item-card-photo">
                 <img src={ product.photo } />
             </div>
-            <h4>{ product.name }</h4>
-            <p>$ { product.price }</p>
-            <p>Disponibles: { stock }</p>
+            <p className='item-title'>{ product.name }</p>
+            <p className='item-price'>$ { product.price }</p>
+            <p className='item-stock'>Disponibles: { stock }</p>
             <ItemCount type='card' product={product} setStock={setStock}/>
         </Link>
     )

@@ -14,7 +14,7 @@ const Cart = () => {
                 <div className="checkout-items">
                     {
                         (cartList.length != 0)? 
-                        <CheckoutTable list={cartList}/>
+                        <CheckoutTable type='cart' />
                         :
                         <h3>No hay ítems agregados!</h3>
                     }
@@ -22,8 +22,8 @@ const Cart = () => {
                 <div className="cart-buttons">
                     <Link to='/' className="cart-button volver">Seguir comprando</Link>
                     <Link onClick={() => deleteSelectedItems()} className="cart-button delete-selected">Borrar seleccionados</Link>
-                    <Link onClick={() => deleteAllItems()} className="cart-button delete-all">Vaciar carrito</Link>
-                    <Link to='/' className="cart-button checkout">Checkout</Link>
+                    <Link onClick={() => deleteAllItems('delete')} className="cart-button delete-all">Vaciar carrito</Link>
+                    <Link to='/checkout' className="cart-button checkout">Checkout</Link>
                 </div>
             </div>
         </div>

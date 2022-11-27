@@ -1,0 +1,13 @@
+.transfer-data {
+    border: 1px solid #aeaeae;
+    border-radius: 10px;
+    padding: 20px 50px;
+    width: fit-content;
+    margin-inline: auto; 
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.transfer-data-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}

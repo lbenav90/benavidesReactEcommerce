@@ -26,3 +26,9 @@
     color:rgb(48, 126, 164);
     cursor: pointer;
 }
+
+.checkout-table-row.total {
+    font-weight: 600;
+    justify-content: flex-end;
+    border: none;
+}

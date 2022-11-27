@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import Swal from 'sweetalert2/dist/sweetalert2.all.js';
 
 const CartContext = createContext([]);
 
@@ -7,7 +8,8 @@ export const useCartContext= () => useContext(CartContext);
 
 const CartContextProvider = ({ children }) => {
     const [ cartList, setCartList ] = useState([]);
-    const [ products, setProducts ] = useState([]);
+    const [ products, setProducts ] = useState([]); 
+    const [ totalCheckout, setTotalCheckout ] = useState(0)
 
     useEffect(() => {
         const dbFirestore = getFirestore();
@@ -15,7 +17,11 @@ const CartContextProvider = ({ children }) => {
         getDocs(queryCollection)
          .then((resp) => { setProducts(resp.docs.map(doc => ({ id:doc.id, ...doc.data() }))) })
 
-    }, [products])
+    }, [])
+
+    useEffect(() => {
+        setTotalCheckout(cartList.reduce((acc, product) => acc + (product.count * product.price), 0))
+    }, [cartList])
 
     const addItem = (newCartItem) => {
         const itemIDs = cartList.map((product) => {return product.id})
@@ -31,26 +37,77 @@ const CartContextProvider = ({ children }) => {
     }
 
     const deleteItem = (itemId) => {
-        setCartList(cartList.filter(item => item.id != itemId));
+        Swal.fire({
+            title: 'Confirmar',
+            text: 'Desea borrar el ítem seleccionado?',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Volver',
+            confirmButtonText: 'Borrar',
+            focusConfirm: true
+        }).then((result) => {
+            if(!result.isConfirmed){
+                return false;
+            }
+            
+            setCartList(cartList.filter(item => item.id != itemId));
+        
+        })
     }
 
-    const deleteAllItems = () => {
-        setCartList([]);
+    const deleteAllItems = (type) => {
+        (type === 'delete')? 
+            Swal.fire({
+                title: 'Confirmar',
+                text: 'Desea vaciar el carrito?',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Volver',
+                confirmButtonText: 'Borrar',
+                focusConfirm: true
+            }).then((result) => {
+                if(!result.isConfirmed){
+                    return false;
+                }
+                
+                setCartList([]);
+            
+            })
+        : 
+            setCartList([]);        
     }
 
     const deleteSelectedItems = () => {
-        const selectedInputs = document.querySelectorAll('.checkout-checkbox');
-        const selectedIds = [];
+        Swal.fire({
+            title: 'Confirmar',
+            text: 'Desea borrar los ítems seleccionados?',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Volver',
+            confirmButtonText: 'Borrar',
+            focusConfirm: true
+        }).then((result) => {
+            if(!result.isConfirmed){
+                return false;
+            }
+            
+            const selectedInputs = document.querySelectorAll('.checkout-checkbox');
+            const selectedIds = [];
+    
+            selectedInputs.forEach(input => input.checked && selectedIds.push(input.value));
+    
+            setCartList(cartList.filter(item => !selectedIds.includes(item.id)));
 
-        selectedInputs.forEach(input => input.checked && selectedIds.push(parseInt(input.value)));
+        })
 
-        setCartList(cartList.filter(item => !selectedIds.includes(item.id)));
     }
 
     return (
         <CartContext.Provider value= {{
             products,
             cartList,
+            totalCheckout,
+            setCartList,
             addItem,
             deleteItem,
             deleteAllItems,

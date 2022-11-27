@@ -9,11 +9,11 @@ import { useEffect } from 'react';
 
 library.add(faPlus, faMinus, faCartPlus);
 
-const ItemCount = ({ type, product, setStock}) => {
+const ItemCount = ({ type, product, setStock }) => {
     const [count, setCount] = useState(1);
     const [added, setAdded] = useState(false);
 
-    const { cartList, addItem } = useCartContext();
+    const { cartList, addItem, setCartList } = useCartContext();
     
     useEffect(() => {
         (type === 'checkout') && setCount(product.count)
@@ -27,20 +27,28 @@ const ItemCount = ({ type, product, setStock}) => {
     const changeCount = (event) => {
         (type === 'card') && event.preventDefault();
 
-        const buttonClass = event.target.className
+        const buttonClass = event.target.className;
 
         switch (buttonClass) {
             case 'plus-item':
                 if (type === 'checkout') {
-                    (count < product.stock) && setCount(count + 1) ;
-                    (count < product.stock) && cartList.forEach((prod) => (prod.id === product.id) && (product.count += 1));
+                    if (count < product.stock) {
+                        setCount(count + 1);
+                        setCartList(cartList.map((prod) => {
+                            return (prod.id === product.id)? {...prod, count: prod.count + 1} : prod; 
+                        }))
+                    }
                 } else {
                     (count < currentStock) && setCount(count + 1);
                 }
                 break;
             case 'minus-item':
                 (count > 1) && setCount(count - 1);
-                (type === 'checkout' && (count > 1)) && cartList.forEach((prod) => (prod.id === product.id) && (product.count -= 1));
+                if (type === 'checkout' && (count > 1)) {
+                    setCartList(cartList.map((prod) => {
+                        return (prod.id === product.id)? {...prod, count: prod.count - 1} : prod; 
+                    }))
+                }
                 break;
         }
     }
