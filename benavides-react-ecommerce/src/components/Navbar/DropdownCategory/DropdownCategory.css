@@ -1,0 +1,17 @@
+.dropdown-subcategories {
+    top: 50px;
+    width: inherit;
+    border-bottom: 1px solid #dddddd;
+    z-index: 100;
+    position:fixed;
+    background: white;
+    opacity: 0;
+}
+
+.dropdown-subcategories:last-child{
+    border-right: 1px solid #dddddd;
+}
+
+.dropdown-subcategories > a > div {
+    height: 50px;
+}

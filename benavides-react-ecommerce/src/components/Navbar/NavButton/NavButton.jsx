@@ -6,11 +6,11 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faCaretDown);
 
-const NavButton = ({ category }) => {
+const NavButton = ({ category, subcategories }) => {
   return (
     <div className='nav-button'>
         { category } 
-        <FontAwesomeIcon icon="fa-solid fa-caret-down" />
+        { subcategories && <FontAwesomeIcon icon="fa-solid fa-caret-down" /> }
     </div>
   )
 }

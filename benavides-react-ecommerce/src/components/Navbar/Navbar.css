@@ -35,3 +35,14 @@
 .logo span {
     cursor: pointer;
 }
+
+.button-container > .category-container > a:hover + .dropdown-subcategories, 
+.button-container > .category-container > .dropdown-subcategories:hover {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.button-container > .category-container > .dropdown-subcategories:hover + .nav-link > .nav-button > svg {
+    /* No esta funcionando esto */
+    transform: rotate(-90deg);
+}
