@@ -1,0 +1,14 @@
+.finish-button {
+    min-width: 111px;
+}
+
+.finish-button svg {
+    color: white;
+    height: 20px;
+    animation: 3s linear infinite spinner;
+}
+
+@keyframes spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

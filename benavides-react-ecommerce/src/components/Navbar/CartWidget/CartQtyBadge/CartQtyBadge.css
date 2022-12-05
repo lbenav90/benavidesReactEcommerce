@@ -1,0 +1,13 @@
+.cart-quantity {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background-color: lightblue;
+    font-size: 9px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transform: translate(7px, 7px);
+}

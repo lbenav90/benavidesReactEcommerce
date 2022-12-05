@@ -1,11 +1,11 @@
-import { addDoc, collection, getFirestore } from "firebase/firestore"
+import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore"
 
 export const uploadOrder = async (buyer, items, total, type) => {
     const db = getFirestore();
     const queryCollection = collection(db, 'orders');
-    await addDoc(queryCollection, { buyer, items, total, type })
+    const docRef = await addDoc(queryCollection, { buyer, items, total, type, date: serverTimestamp() })
 
-    return new Promise((resolve, reject) => resolve(123))
+    return new Promise((resolve, reject) => resolve(docRef.id))
 }
 
 export const paymentSimulator = (info) => {

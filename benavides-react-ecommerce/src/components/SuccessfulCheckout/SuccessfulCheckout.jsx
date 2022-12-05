@@ -5,17 +5,17 @@ import './SuccessfulCheckout.css'
 
 const SuccessfulCheckout = () => {
     const props = useLocation();
-    
+
     if (!props.state) {
+        console.log(props.state);
         return <Navigate to='/' />
     }
 
     return (
         <div className="successful-div">
             <p className="success-title">Compra exitosa!</p>
-            {/* Cambiar el purchase number para que no este hardcodeado y este en le oredn subida a firebase */}
             <p className="buyer-name">Hola { props.state.dataForm.name }!</p>
-            <p className="purchase-number">Su número de pedido es #54235</p>
+            <p className="purchase-number">Su número de pedido es #{ props.state.autoId.toLowerCase() }</p>
             {(props.state.paymentRadio === 'transfer')?
                 <>
                     <p className="success-info">Usted eligió pago por transferencia</p>

@@ -5,6 +5,7 @@ import './Checkout.css'
 import { useState } from "react";
 import Transferdata from "./TransferData/Transferdata";
 import { paymentSimulator, uploadOrder } from "../../utils/functions";
+import FinishButton from "./FinishButton/FinishButton";
 
 
 const Checkout = () => {
@@ -15,7 +16,7 @@ const Checkout = () => {
         email: '',
         reEmail: ''
     })
-
+    
     const [paymentForm, setPaymentForm] = useState({
         cardNumber: '',
         cardHolder: '',
@@ -24,15 +25,16 @@ const Checkout = () => {
         cardExpYear: '',
         cardSecurity: ''
     })
-
+    
     const [ paymentRadio , setPaymentRadio ] = useState('transfer')
+    const [ loading, setLoading ] = useState(false);
     const [ alerts, setAlerts ] = useState([])
     const navigate = useNavigate();
 
     const createOrder = (event) => {
-
         event.preventDefault();
         setAlerts([]);
+        setLoading(true);
 
         if (dataForm.email != dataForm.reEmail) {
             setAlerts([...alerts, 'Confirmación de email fallida'])
@@ -42,21 +44,22 @@ const Checkout = () => {
         // Chequear stock al poner la orden
         if (paymentRadio === 'transfer'){
             uploadOrder(dataForm, cartList.map(({ id, name, price }) => ({ id, name, price })), totalCheckout, 'transfer')
-                .then(() => {
-                    navigate('/success', {state: {dataForm, cartList, paymentRadio }})
+                .then((autoId) => {
+                    navigate('/success', {state: {dataForm, cartList, paymentRadio, autoId }})
                     deleteAllItems('success')
                 })
             } else {
                 paymentSimulator(paymentForm)
-                .then((result) => {
+                .then(() => {
                     uploadOrder(dataForm, cartList.map(({ id, name, price }) => ( { id, name, price } )), totalCheckout, 'card')
-                    .then(() => {
-                        navigate('/success', {state: {dataForm, cartList, paymentRadio }})
+                    .then((autoId) => {
+                        navigate('/success', {state: {dataForm, cartList, paymentRadio, autoId }})
                         deleteAllItems('success')
                     })
             })
             .catch((error) => {
-                    setAlerts([...alerts, error])
+                setLoading(false);
+                setAlerts([...alerts, error]);
             })
         }
     }
@@ -135,15 +138,15 @@ const Checkout = () => {
                     </>
                 }
             </div>
-            <div className="form-buttons">
-                <Link to='/' className="volver">Seguir comprando</Link>
-                <input type='submit' value='Hacer pedido'/>
-            </div>
             { (alerts.length != 0) && 
                 <div className="alerts">
                     { alerts.map((alert) => <p className="checkout-alert" key={alert}>{ alert }</p>)}   
                 </div>
             }
+            <div className="form-buttons">
+                <Link to='/' className="volver">Seguir comprando</Link>
+                <FinishButton type={ loading } />
+            </div>
         </form>
            
     </div>

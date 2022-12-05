@@ -17,12 +17,12 @@ const Navbar = () => {
   return (
     <nav className="top-navbar">
         <Link to='/' className="logo"><span>mondrian</span></Link>
-        <div className="button-container">
+        <div className="button-container" >
           { categories.map((cat) => {
             return (
-              <div className='category-container'>
-                <Link className='nav-link' to={`/category/${cat.toLowerCase()}`} key={cat} >
-                  <NavButton category={cat} subcategories={true}/>
+              <div className='category-container' key={cat}>
+                <Link className='nav-link' to={`/category/${cat.toLowerCase()}`}>
+                  <NavButton category={cat} subcategories={true} />
                 </Link>
                 <DropdownCategory category={cat} subcategories={subs[cat]} />
               </div>

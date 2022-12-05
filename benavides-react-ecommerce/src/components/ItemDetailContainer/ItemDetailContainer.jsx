@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './ItemDetailContainer.css'
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import ItemCount from '../ItemCount/ItemCount';
 import { useCartContext } from '../../context/CartContext';
 
@@ -10,23 +11,19 @@ const ItemDetailContainer = () => {
     const { productId } = useParams();
     const [ loading, setLoading ] = useState(true);
     const [ product, setProduct ] = useState({})
-    const [ stock, setStock ] = useState(0);
-    
-    const { products, cartList } = useCartContext();
 
     useEffect(() => {
-        const filtered = Object.entries(products).filter((prod) => productId == prod[1].id)
-
-        filtered.length != 0 && setProduct(filtered[0][1])
-        filtered.length != 0 && setLoading(false);
-    }, [products, loading])
-
-    let currentStock = 0;
+        product.length != 0 && setLoading(false)
+      }, [product])
 
     useEffect(() => {
-        currentStock = (product.stock || 0) - (cartList.filter((prod) => productId === prod.id)[0]?.count || 0);
-        setStock(currentStock)
-    }, [product])
+        setLoading(true);
+        const db = getFirestore();
+        const query = doc(db, 'items', productId);
+        getDoc(query)
+          .then(resp => { 
+            setProduct({id: productId, ...resp.data()}) } )
+      }, [])
     
     
     return (

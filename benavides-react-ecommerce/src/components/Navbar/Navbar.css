@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 
 .top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,13 +39,9 @@
     cursor: pointer;
 }
 
-.button-container > .category-container > a:hover + .dropdown-subcategories, 
-.button-container > .category-container > .dropdown-subcategories:hover {
+.nav-link:hover + .dropdown-subcategories, 
+.dropdown-subcategories:hover {
+    visibility: visible;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
-}
-
-.button-container > .category-container > .dropdown-subcategories:hover + .nav-link > .nav-button > svg {
-    /* No esta funcionando esto */
-    transform: rotate(-90deg);
 }

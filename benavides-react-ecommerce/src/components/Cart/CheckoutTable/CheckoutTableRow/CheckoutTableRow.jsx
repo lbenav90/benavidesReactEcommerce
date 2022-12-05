@@ -7,8 +7,8 @@ import { useCartContext } from '../../../../context/CartContext';
 
 library.add(faTrash);
 
-const CheckoutTableRow = ({ item, type }) => {
-    const { deleteItem, cartList, totalCheckout } = useCartContext();
+const CheckoutTableRow = ({ item, type, total }) => {
+    const { deleteItem, totalCheckout } = useCartContext();
 
     return ((['item', 'summary'].includes(type) )?
         <div className='checkout-table-row item'>
@@ -22,7 +22,7 @@ const CheckoutTableRow = ({ item, type }) => {
         </div>
         :
         <div className="checkout-table-row total">
-            <span className="checkout-total">Total: ${ totalCheckout.toFixed(2) }</span>
+            <span className="checkout-total">Total: ${ total? total.toFixed(2) : totalCheckout.toFixed(2) }</span>
         </div>  
     )
 }
