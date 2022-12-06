@@ -7,7 +7,9 @@ library.add(faSpinner)
 
 const FinishButton = ({ type }) => {
     return (
-        <button className='finish-button'>{ type? <FontAwesomeIcon icon="fa-solid fa-spinner" /> : "Hacer pedido"}</button>
+        <button className='finish-button'>{ 
+            type? <FontAwesomeIcon icon="fa-solid fa-spinner" /> : "Hacer pedido"
+        }</button>
     )
 }
 

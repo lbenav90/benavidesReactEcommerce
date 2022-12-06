@@ -19,10 +19,8 @@ const ItemCount = ({ type, product, setStock }) => {
         (type === 'checkout') && setCount(product.count)
     }, [])
 
+    // Esto permite mantener la coherencia de stock según vaya agregando en cualquier componente donde se use el ItemCount
     const currentStock = product.stock - (cartList.filter((prod) => product.id === prod.id)[0]?.count || 0);
-
-    // TODO Chequear porque al usar el itemCount la priemra vez rerenderiza todas las cards pero las siguientes no
-    // Pasa lo mismo si elimino el setStock y uso el currentStock en itemCard, funciona en el primer click y ya no anda en los siguientes
 
     const changeCount = (event) => {
         (type === 'card') && event.preventDefault();
@@ -82,7 +80,6 @@ const ItemCount = ({ type, product, setStock }) => {
                     addItem({...product, count});
                     (currentStock === 0)? setCount(0) : setCount(1);
                     setAdded(true);
-                    // Add toastify and refactor
                 }}>Agregar al carrito</button>
             }
         </>
@@ -101,7 +98,6 @@ const ItemCount = ({ type, product, setStock }) => {
                 (currentStock - count === 0)? setCount(0) : setCount(1);
                 setStock(currentStock - count);
                 setAdded(true);
-                // Add toastify and refactor
             }} className="add-to-cart type-card"><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></button>
         </div>
         )

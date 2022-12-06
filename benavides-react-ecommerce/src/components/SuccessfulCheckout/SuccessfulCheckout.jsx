@@ -7,7 +7,6 @@ const SuccessfulCheckout = () => {
     const props = useLocation();
 
     if (!props.state) {
-        console.log(props.state);
         return <Navigate to='/' />
     }
 

@@ -5,7 +5,6 @@ import './ItemDetailContainer.css'
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import ItemCount from '../ItemCount/ItemCount';
-import { useCartContext } from '../../context/CartContext';
 
 const ItemDetailContainer = () => {
     const { productId } = useParams();

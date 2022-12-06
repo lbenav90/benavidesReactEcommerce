@@ -6,7 +6,6 @@ import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { useEffect } from 'react';
 
-
 const ItemContainer = () => {
     const { categoryId, subcategoryId } = useParams();
     const [ products, setProducts ] = useState([])
@@ -22,6 +21,8 @@ const ItemContainer = () => {
       const query = collection(db, 'items');
       getDocs(query)
         .then((resp) => { 
+          // Hago el filtrado de esta manera por la forma en la que implementé las categorías y subcategorías.
+          // Para no modificar manualmente todos los productos, implemento el filtrado de esta manera
           let newProducts = resp.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           categoryId && (newProducts = newProducts.filter((product) => product.category.split(' ').includes(categoryId)))
           subcategoryId && (newProducts = newProducts.filter((product) => product.category.split(' ').includes(subcategoryId)))
