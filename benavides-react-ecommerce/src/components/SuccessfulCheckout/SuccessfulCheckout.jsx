@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom"
 import CheckoutTable from "../Cart/CheckoutTable/CheckoutTable";
-import Transferdata from "../Checkout/TransferData/Transferdata";
+import Transferdata from "../Checkout/Transferdata/Transferdata";
 import './SuccessfulCheckout.css'
 
 const SuccessfulCheckout = () => {
