@@ -6,12 +6,12 @@ import './Navbar.css'
 import NavButton from './NavButton/NavButton'
 
 const Navbar = () => {
-  const categories = ['Men', 'Women', 'Children', 'Sports']
+  const categories = ['Hombre', 'Mujer', 'Niños', 'Deportes' ]
   const subs = {
-    'Men': ['Shirts', 'Pants', 'Shoes'],
-    'Women': ['Shirts', 'Pants', 'Shoes'],
-    'Sports': ['Shirts', 'Pants', 'Shoes'],
-    'Children': ['Shirts', 'Pants', 'Shoes', 'Headwear']
+    'Hombre': ['Remeras', 'Pantalones', 'Zapatillas'],
+    'Mujer': ['Remeras', 'Pantalones', 'Zapatillas'],
+    'Deportes': ['Remeras', 'Pantalones', 'Zapatillas'],
+    'Niños': ['Remeras', 'Pantalones', 'Zapatillas', 'Gorras']
   }
 
   return (

@@ -10,7 +10,7 @@ const Cart = () => {
     return (
         <div className='cart'>
             <div className="inner-cart">
-                <h1>Checkout</h1>
+                <h1>Carrito de compras:</h1>
                 <div className="checkout-items">
                     {
                         (cartList.length != 0)? 
