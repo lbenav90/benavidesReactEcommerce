@@ -3,7 +3,7 @@ import CheckoutTable from "../Cart/CheckoutTable/CheckoutTable"
 import { Navigate, Link, useNavigate } from "react-router-dom";
 import './Checkout.css'
 import { useState } from "react";
-import Transferdata from "./TransferData/Transferdata.jsx";
+import Transferdata from "./TransferData/Transferdata";
 import { paymentSimulator, uploadOrder } from "../../utils/functions";
 import FinishButton from "./FinishButton/FinishButton";
 
