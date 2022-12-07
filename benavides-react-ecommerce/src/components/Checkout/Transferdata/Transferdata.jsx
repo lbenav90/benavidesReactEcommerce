@@ -1,4 +1,4 @@
-import './TransferData.css'
+import './Transferdata.css'
 
 const Transferdata = () => {
     return (
